@@ -6,13 +6,13 @@ const router = express.Router();
 router.get("/", (req, res) => {
     Projects.get()
     .then(projects => res.status(200).json(projects))
-    .catch(err => res.status(500).json({ message: "Error getting all projects."}))});
+    .catch(() => res.status(500).json({ message: "Error getting all projects."}))});
 
 // GET project by ID
 router.get("/:id", (req, res) => {
     Projects.get(req.params.id)
     .then(project => res.json(project))
-    .catch(err => res.status(500).json({ message: "Error getting this project."}));
+    .catch(() => res.status(500).json({ message: "Error getting this project."}));
 });
 
 // PUT project by ID
@@ -29,7 +29,14 @@ router.put("/:id", (req, res) => {
 router.post("/", (req, res) => {
     Projects.insert(req.body)
     .then(project => res.status(200).json(project))
-    .catch(err => res.status(500).json({ message: "Error: cannot add new project."}));
+    .catch(() => res.status(500).json({ message: "Error: cannot add new project."}));
+});
+
+// DELETE a project by ID
+router.delete("/:id", (req, res) => {
+    Projects.remove(req.params.id)
+    .then(project => res.json(project))
+    .catch(() => res.status(500).json("Error: cannot delete this project."));
 });
 
 module.exports = router;
