@@ -25,4 +25,11 @@ router.put("/:id", (req, res) => {
     .catch(() => res.status(500).json({ error: "Error: unable to edit this project."}));
 });
 
+// POST a new project
+router.post("/", (req, res) => {
+    Projects.insert(req.body)
+    .then(project => res.status(200).json(project))
+    .catch(err => res.status(500).json({ message: "Error: cannot add new project."}));
+});
+
 module.exports = router;
