@@ -9,6 +9,14 @@ router.get("/", (req, res) => {
     .catch(() => res.status(500).json({ message: "Error getting all actions."}));
 });
 
+// GET action by ID
+router.get("/:id", (req, res) => {
+    Actions.get(req.params.id)
+    .then(action => res.json(action))
+    .catch(() => res.status(500).json({ message: "Error: cannot get this action."}));
+});
+
+
 module.exports = router;
 
 
