@@ -22,7 +22,7 @@ router.put("/:id", (req, res) => {
     };
     Projects.update(req.params.id, req.body)
     .then(project => project ? res.status(200).json(project) : res.status(404).json({ error: "Error: cannot find this project."}))
-    .catch(() => res.status(500).json({ error: "Error: unable to edit this project."}));
+    .catch(() => res.status(500).json({ message: "Error: unable to edit this project."}));
 });
 
 // POST a new project
