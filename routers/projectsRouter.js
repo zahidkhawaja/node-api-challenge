@@ -8,6 +8,13 @@ router.get("/", (req, res) => {
     .then(projects => res.status(200).json(projects))
     .catch(err => res.status(500).json({ message: "Error getting all projects."}))});
 
+// GET project by ID
+router.get("/:id", (req, res) => {
+    Projects.get(req.params.id)
+    .then(project => res.json(project))
+    .catch(err => res.status(500).json({ message: "Error getting this project."}));
+});
+
 // PUT project by ID
 router.put("/:id", (req, res) => {
     if(!req.body.name || !req.body.description) {
