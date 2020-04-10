@@ -16,6 +16,16 @@ router.get("/:id", (req, res) => {
     .catch(() => res.status(500).json({ message: "Error: cannot get this action."}));
 });
 
+// PUT action by ID
+router.put("/:id", (req, res) => {
+    if(!req.body.notes || !req.body.description) {
+        res.status(400).json({ error: "Error: notes and description required."})
+    }
+    Actions.update(req.params.id, req.body)
+    .then(action => action ? res.status(200).json(action) : res.status(400).json({ message: "Error: cannot find this action."}))
+    .catch(() => res.status(500).json({ message: "Error: unable to update action."}));
+});
+
 
 module.exports = router;
 
