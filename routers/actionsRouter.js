@@ -26,6 +26,15 @@ router.put("/:id", (req, res) => {
     .catch(() => res.status(500).json({ message: "Error: unable to update action."}));
 });
 
+// POST a new action
+router.post("/", (req, res) => {
+    Actions.insert(req.body)
+    .then(action => res.status(200).json(action))
+    .catch(() => res.status(500).json({ message: "Error: cannot add new action."}));
+});
+
+
+
 
 module.exports = router;
 
