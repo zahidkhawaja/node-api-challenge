@@ -33,8 +33,12 @@ router.post("/", (req, res) => {
     .catch(() => res.status(500).json({ message: "Error: cannot add new action."}));
 });
 
-
-
+// DELETE action by ID
+router.delete("/:id", (req, res) => {
+    Actions.remove(req.params.id)
+    .then(action => res.json(action))
+    .catch(() => res.status(500).json({ message: "Error: cannot delete this action."}));
+});
 
 module.exports = router;
 

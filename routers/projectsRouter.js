@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
 router.delete("/:id", (req, res) => {
     Projects.remove(req.params.id)
     .then(project => res.json(project))
-    .catch(() => res.status(500).json("Error: cannot delete this project."));
+    .catch(() => res.status(500).json({ message: "Error: cannot delete this project."}));
 });
 
 module.exports = router;
